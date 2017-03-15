@@ -1,4 +1,4 @@
-PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%, $(filter device/%,$(ALL_PRODUCTS)))))
+PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%, $(filter device/%, $(ALL_PRODUCTS)))))
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -67,8 +67,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
 
 # WiFi    
-PRODUCT_COPY_FILES += \    
+PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
+
+# Get the firmwares
+$(call inherit-product, device/hp/g62/firmware.mk)
 
 # Get tablet dalvik parameters
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
