@@ -79,11 +79,8 @@ PRODUCT_PACKAGES += \
     Terminal
 
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
     NotePad \
     drmserver \
-    Provision \
     gps.default \
     lights.default \
     scp \
