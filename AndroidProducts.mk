@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/g62.mk 
+     $(LOCAL_DIR)/aosp_g62.mk
