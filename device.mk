@@ -13,6 +13,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
 # Get everything else from the parent package
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
 
+# Get some sounds
+$(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage6.mk)
+
 PRODUCT_COPY_FILES := \
     $(if $(wildcard $(PRODUCT_DIR)init.rc), $(PRODUCT_DIR)init.rc:root/init.rc) \
     $(if $(wildcard $(PRODUCT_DIR)modules.blacklist), $(PRODUCT_DIR),$(LOCAL_PATH)/)modules.blacklist:system/etc/modules.blacklist
@@ -69,6 +72,41 @@ PRODUCT_COPY_FILES += \
 # WiFi    
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
+
+
+PRODUCT_PACKAGES += \
+    Launcher3 \
+    Terminal
+
+PRODUCT_PACKAGES += \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    NotePad \
+    drmserver \
+    Provision \
+    gps.default \
+    lights.default \
+    scp \
+    sensors.hsb \
+    sftp \
+    ssh \
+    sshd \
+
+# USB
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
+
+# WiFi
+PRODUCT_PACKAGES += \
+    libwpa_client \
+    wpa_cli \
+    wpa_supplicant
+
+# Audio
+PRODUCT_PACKAGES_DEBUG += \
+    tinymix \
+    tinyplay \
+    tinycap
 
 # Get the firmwares
 $(call inherit-product, device/hp/g62/firmware.mk)
