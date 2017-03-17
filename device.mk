@@ -17,8 +17,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage6.mk)
 
 PRODUCT_COPY_FILES := \
-    $(if $(wildcard $(PRODUCT_DIR)init.rc), $(PRODUCT_DIR)init.rc:root/init.rc) \
-    $(if $(wildcard $(PRODUCT_DIR)modules.blacklist), $(PRODUCT_DIR),$(LOCAL_PATH)/)modules.blacklist:system/etc/modules.blacklist
+    $(if $(wildcard $(PRODUCT_DIR)init.$(TARGET_PRODUCT).rc), $(PRODUCT_DIR)init.$(TARGET_PRODUCT).rc, $(LOCAL_PATH)/init.rc):root/init.$(TARGET_PRODUCT).rc \
+    $(if $(wildcard $(PRODUCT_DIR)fstab.$(TARGET_PRODUCT)), $(PRODUCT_DIR)fstab.$(TARGET_PRODUCT), $(LOCAL_PATH)/fstab):root/fstab.$(TARGET_PRODUCT)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml
@@ -39,11 +39,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
 
 # Gps
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml
+PRODUCT_PACKAGES += gps.default
 
 # Touch
 PRODUCT_COPY_FILES += \
@@ -58,12 +61,17 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml
+PRODUCT_PACKAGES += sensors.hsb
 
 # Audio/video codec support.
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
+PRODUCT_PACKAGES_DEBUG += \
+    tinymix \
+    tinyplay \
+    tinycap
 
 # Ethernet
 PRODUCT_COPY_FILES += \
@@ -72,7 +80,10 @@ PRODUCT_COPY_FILES += \
 # WiFi    
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
-
+PRODUCT_PACKAGES += \
+    libwpa_client \
+    wpa_cli \
+    wpa_supplicant
 
 PRODUCT_PACKAGES += \
     Launcher3 \
@@ -81,29 +92,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NotePad \
     drmserver \
-    gps.default \
     lights.default \
     scp \
-    sensors.hsb \
     sftp \
     ssh \
-    sshd \
+    sshd
 
-# USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
-
-# WiFi
-PRODUCT_PACKAGES += \
-    libwpa_client \
-    wpa_cli \
-    wpa_supplicant
-
-# Audio
-PRODUCT_PACKAGES_DEBUG += \
-    tinymix \
-    tinyplay \
-    tinycap
+# Enable MultiWindow
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.debug.multi_window=true
 
 # Get the firmwares
 $(call inherit-product, device/hp/g62/firmware.mk)
