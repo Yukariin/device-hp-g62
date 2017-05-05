@@ -46,7 +46,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml
-PRODUCT_PACKAGES += gps.default
+PRODUCT_PACKAGES += \
+    gps.default
 
 # Touch
 PRODUCT_COPY_FILES += \
@@ -61,7 +62,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml
-PRODUCT_PACKAGES += sensors.hsb
+PRODUCT_PACKAGES += \
+    sensors.hsb
 
 # Audio/video codec support.
 PRODUCT_COPY_FILES += \
@@ -83,7 +85,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libwpa_client \
     wpa_cli \
-    wpa_supplicant
+    wpa_supplicant \
+    android.hardware.wifi@1.0-service
+PRODUCT_PROPERTY_OVERRIDES := \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15
+
+# Mesa
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.opengles.version=196609
 
 PRODUCT_PACKAGES += \
     Launcher3 \
