@@ -4,11 +4,12 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi xhdpi xxhdpi
+PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi 
 
 # Get a list of languages.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
+PRODUCT_LOCALES := en_US ru_RU
 
 # Get everything else from the parent package
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
@@ -95,7 +96,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
 PRODUCT_PROPERTY_OVERRIDES += \
-   ro.opengles.version=131072
+    ro.opengles.version=131072
 
 PRODUCT_PACKAGES += \
     Launcher3 \

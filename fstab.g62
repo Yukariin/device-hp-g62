@@ -5,4 +5,4 @@ none                            /cache          tmpfs   nosuid,nodev,noatime    
 /devices/*/80860F14:01/mmc_*    auto            auto    defaults                voldmanaged=sdcard1:auto,encryptable=userdata
 
 # Enable ZRAM swap
-/dev/block/zram0                none            swap    defaults                zramsize=,notrim
+/dev/block/zram0                none            swap    defaults                zramsize=1024,notrim

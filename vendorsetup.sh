@@ -1,3 +1,3 @@
-add_lunch_combo aosp_g62-eng
-add_lunch_combo aosp_g62-userdebug
-add_lunch_combo aosp_g62-user
+add_lunch_combo g62-eng
+add_lunch_combo g62-userdebug
+add_lunch_combo g62-user
